@@ -1,0 +1,138 @@
+<html>
+  <head> 
+    <title>
+        Sunset
+    </title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    {% load static %}
+        <link rel="stylesheet" href='{% static "blog/cssfiles/beach.css" %}'>
+   
+  </head>
+
+
+<header> 
+
+   <!-- Start Of Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    
+    <a class="navbar-brand" href="#">Travel Bloger</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" ></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home">Blogs <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav mr-2">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello {{request.user}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="logout" >Logout</a>
+          </div>
+        </li>
+      </ul>  
+
+      {% endif %}
+
+</nav>
+</header>
+
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} mb-0 alert-dismissable fade show" role="alert" >
+   <strong>Hey there!</strong> {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+{% endfor%}
+
+<body> 
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"><div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="display-4">Sunset</h2>
+    <p class="lead">A beautiful place to pay visit to. </p>
+  </div>
+                                     
+<div class="container">           
+  <div class="card-deck mb-3 text-center">  
+    <div class="card mb-4 shadow-sm">
+      
+      <div class="card-body">
+        
+          <img src='{% static "blog/images/jharna.JPG"%}' class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" n focusable="false" role="img" aria-label="Placeholder: 500x500">
+          <rect width="50%" height="50%" fill="#eee"/>
+          </img>
+    </div>
+
+    
+    <div class="card mb-4 shadow-sm">
+     
+      <div class="card-body">
+        
+          <img src='{% static "blog/images/sset.JPG"%}' class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"  preserveAspectRatio="xMidYMid slice" >
+          <rect width="50%" height="50%" fill="#eee"/>
+          </img>
+         
+      </div>
+    </div>
+  </div>
+
+   
+<div class="container">
+    <div align="left">  
+       <label> Type Your Commentmauris here </label>
+    </div> 
+
+    <br>
+
+    {% if user.is_authenticated %}
+    <form method="POST" action="sunset">
+       {% csrf_token %}
+      <div align="left">
+      <textarea name="comment" cols="80" rows="6" required></textarea>
+      </div>
+
+      <br>
+   
+      <div align="left">
+      <button type="submit">Post</button>
+      </div>
+    </form>
+    {% else %}
+      <h3>  Please Login to Comment on this Post </h3>
+    {% endif %}
+
+        <div align="left">
+        <h4>Comments </h4>
+      </div>
+
+    {% for coment in comments %}
+
+          <div align="left">
+            <blockquote clamauriss="blockquote">
+              <p class="mb-0"> {{ coment.comment }} </p>
+               <footer class="blockquote-footer">  {{coment.user.username}}</cite></footer>
+            </blockquote>
+          </div>
+          
+    {% endfor %}
+      
+</div>
+    
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</html>
+
